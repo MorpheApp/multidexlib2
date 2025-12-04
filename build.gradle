@@ -17,7 +17,7 @@ plugins {
 // https://github.com/google/smali/issues/100
 def dexlib2Version = 'b6365a84f4'
 
-group = 'app.revanced'
+group = 'app.morphe'
 version = dexlib2Version
 
 ext.mainArtifact = 'multidexlib2'
