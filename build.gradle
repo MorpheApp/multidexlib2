@@ -14,11 +14,11 @@ plugins {
     id 'signing'
 }
 
-def dexlib2Version = '3.0.3'
-def multidexlib2VersionSuffix = '.r3'
+// https://github.com/google/smali/issues/100
+def dexlib2Version = 'b6365a84f4'
 
 group = 'app.revanced'
-version = dexlib2Version + multidexlib2VersionSuffix
+version = dexlib2Version
 
 ext.mainArtifact = 'multidexlib2'
 ext.artifactName = mainArtifact
@@ -28,12 +28,19 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
-    google()
+    // Obtain baksmali/smali from source builds - https://github.com/iBotPeaches/smali
+    // Remove when official smali releases come out again.
+    maven {
+        url = uri("https://jitpack.io")
+        content {
+            includeGroup("com.github.iBotPeaches.smali")
+        }
+    }
 }
 
 dependencies {
-    api 'com.android.tools.smali:smali-dexlib2:' + dexlib2Version
-    api 'com.google.guava:guava:32.1.2-jre'
+    api 'com.github.iBotPeaches.smali:smali-dexlib2:' + dexlib2Version
+    api 'com.google.guava:guava:33.5.0-jre'
 }
 
 apply from: 'configure-artifacts.gradle'
